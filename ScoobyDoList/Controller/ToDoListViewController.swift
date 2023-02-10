@@ -50,6 +50,10 @@ class ToDoListViewController: UITableViewController{
      //MARK: - TableView Delegate Methods
      override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
           
+//          context.delete(itemArray[indexPath.row]) //You should call first
+//          itemArray.remove(at: indexPath.row)
+          //Delete Codelines are above
+          
           itemArray[indexPath.row].done = !itemArray[indexPath.row].done //It sets the opposite of what it is true->false
           
           saveItems()
@@ -97,15 +101,46 @@ class ToDoListViewController: UITableViewController{
           
      }
      
-     func loadItems(){ //Read Data in CRUD
-          let request : NSFetchRequest<Item> = Item.fetchRequest()//NSFetchRequest in Item data type
+     func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()){ //Read Data in CRUD
+          //We have external/internal parameter also at the and we add Default parameter by = Item.fetchRequest()
           do {
                itemArray = try context.fetch(request)
           } catch {
                print("Error fetching data from context \(error)")
           }
+          tableView.reloadData()
      }
 }
+     //MARK: - SearchBar Methods
+extension ToDoListViewController : UISearchBarDelegate{
+     
+     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+          let request : NSFetchRequest<Item> = Item.fetchRequest()
+          
+          request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+          //https://academy.realm.io/posts/nspredicate-cheatsheet/ NSPredicate Cheat Sheet
 
+          request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+          //Results come back
+          loadItems(with: request)
+          
+     }
+     
+     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+          if searchBar.text?.count == 0{
+               loadItems()
+               
+               DispatchQueue.main.async {
+                    searchBar.resignFirstResponder() //No more editing ->no longer keyboard
+                    //Using DispatchQueue assings project into diffrent threads
+               }
+               
+          }
+          
 
+     }
+     
+     
+     
+}
 
