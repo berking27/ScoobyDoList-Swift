@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q88-WG-gQD">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -8,6 +8,45 @@
     </dependencies>
     <scenes>
         <!--ScoobyDoList-->
+        <scene sceneID="xZm-b9-CN1">
+            <objects>
+                <tableViewController id="xGI-4C-PGz" customClass="CategoryViewController" customModule="ScoobyDoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Xvj-TV-y9y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="vml-vY-V0I">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vml-vY-V0I" id="L2l-Mp-O6E">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xGI-4C-PGz" id="6dr-xp-pcw"/>
+                            <outlet property="delegate" destination="xGI-4C-PGz" id="HSQ-2m-qU3"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="ScoobyDoList" id="fRR-8R-4Se">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="42h-aI-Fun">
+                            <color key="tintColor" red="0.43332254886627197" green="0.018183421343564987" blue="0.98834389448165894" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="xGI-4C-PGz" id="cv0-Z1-KQu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Fqq-QR-fwo" kind="show" identifier="goToItems" id="OdH-1R-WEG"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cuy-Zf-eGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-125" y="115"/>
+        </scene>
+        <!--Items-->
         <scene sceneID="6Vl-Rd-dKe">
             <objects>
                 <tableViewController id="Fqq-QR-fwo" customClass="ToDoListViewController" customModule="ScoobyDoList" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,9 +77,9 @@
                             <outlet property="delegate" destination="Fqq-QR-fwo" id="Npm-sw-F4z"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ScoobyDoList" id="Swn-7J-hIW">
+                    <navigationItem key="navigationItem" title="Items" id="Swn-7J-hIW">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="KAZ-1o-M8V">
-                            <color key="tintColor" red="0.95766335729999996" green="0.89046734569999997" blue="0.14639079569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" red="0.43332254886627197" green="0.018183421343564987" blue="0.98834389448165894" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="Fqq-QR-fwo" id="559-qe-WQB"/>
                             </connections>
@@ -49,7 +88,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7d7-RM-ysP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="171.01449275362319" y="109.82142857142857"/>
+            <point key="canvasLocation" x="871" y="115"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9a2-5q-D6P">
@@ -70,12 +109,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Fqq-QR-fwo" kind="relationship" relationship="rootViewController" id="fv3-EX-1H7"/>
+                        <segue destination="xGI-4C-PGz" kind="relationship" relationship="rootViewController" id="0eL-uV-VBU"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6nc-ip-0Ah" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-739.13043478260875" y="109.82142857142857"/>
+            <point key="canvasLocation" x="-1141" y="115"/>
         </scene>
     </scenes>
     <resources>

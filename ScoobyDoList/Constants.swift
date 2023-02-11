@@ -7,5 +7,7 @@
 
 struct K {
      static let cellIdentifier = "ToDoItemCell"
+     static let categoryCellIdentifier = "CategoryCell"
+     static let goItemCellIdentifier = "goToItems"
      static let ItemForKey = "ToDoListArray"
 }

@@ -50,8 +50,8 @@ class ToDoListViewController: UITableViewController{
      //MARK: - TableView Delegate Methods
      override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
           
-//          context.delete(itemArray[indexPath.row]) //You should call first
-//          itemArray.remove(at: indexPath.row)
+          //          context.delete(itemArray[indexPath.row]) //You should call first
+          //          itemArray.remove(at: indexPath.row)
           //Delete Codelines are above
           
           itemArray[indexPath.row].done = !itemArray[indexPath.row].done //It sets the opposite of what it is true->false
@@ -67,14 +67,12 @@ class ToDoListViewController: UITableViewController{
           let alert = UIAlertController(title: "Add New Scooby Do List", message: "", preferredStyle: .alert)
           let action = UIAlertAction(title: "Add Item", style: .default) { action in
                //What will happen once the user clicks the Add Item Button on our UIAlert
-               
                let newItem = Item(context: self.context)
                newItem.title = textField.text!
                newItem.done = false
                
                self.itemArray.append(newItem)
                self.saveItems()
-               
           }
           
           alert.addTextField { (alertTextField) in
@@ -111,7 +109,7 @@ class ToDoListViewController: UITableViewController{
           tableView.reloadData()
      }
 }
-     //MARK: - SearchBar Methods
+//MARK: - SearchBar Methods
 extension ToDoListViewController : UISearchBarDelegate{
      
      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -119,7 +117,7 @@ extension ToDoListViewController : UISearchBarDelegate{
           
           request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
           //https://academy.realm.io/posts/nspredicate-cheatsheet/ NSPredicate Cheat Sheet
-
+          
           request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
           //Results come back
           loadItems(with: request)
@@ -137,7 +135,7 @@ extension ToDoListViewController : UISearchBarDelegate{
                
           }
           
-
+          
      }
      
      
