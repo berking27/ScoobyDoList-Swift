@@ -13,6 +13,12 @@ class ToDoListViewController: UITableViewController{
      
      var itemArray = [Item]()
      
+     var selectedCategory : Category? {
+          didSet{
+               loadItems()
+          }//when selected Category gets its value, inside curly braces will be done
+     }
+     
      let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
      
      override func viewDidLoad() {
@@ -20,7 +26,7 @@ class ToDoListViewController: UITableViewController{
           
           print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
           
-          loadItems()
+          
      }
      
      
@@ -61,15 +67,20 @@ class ToDoListViewController: UITableViewController{
           tableView.deselectRow(at: indexPath, animated: true)
           
      }//When you select table cell you're going to print it
+     
+     
+     
      //MARK: - Add New Items
      @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
           var textField = UITextField()
           let alert = UIAlertController(title: "Add New Scooby Do List", message: "", preferredStyle: .alert)
           let action = UIAlertAction(title: "Add Item", style: .default) { action in
                //What will happen once the user clicks the Add Item Button on our UIAlert
+               
                let newItem = Item(context: self.context)
                newItem.title = textField.text!
                newItem.done = false
+               newItem.parentCategory = self.selectedCategory
                
                self.itemArray.append(newItem)
                self.saveItems()
@@ -99,7 +110,16 @@ class ToDoListViewController: UITableViewController{
           
      }
      
-     func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()){ //Read Data in CRUD
+     func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest(),predicate : NSPredicate? = nil){ //Read Data in CRUD
+          
+          let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+          
+          if let addtionalPredicate = predicate{
+               request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate,addtionalPredicate])
+          }else {
+               request.predicate = categoryPredicate
+          }
+          
           //We have external/internal parameter also at the and we add Default parameter by = Item.fetchRequest()
           do {
                itemArray = try context.fetch(request)
@@ -114,13 +134,13 @@ extension ToDoListViewController : UISearchBarDelegate{
      
      func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
           let request : NSFetchRequest<Item> = Item.fetchRequest()
-          
-          request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+          let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
           //https://academy.realm.io/posts/nspredicate-cheatsheet/ NSPredicate Cheat Sheet
           
           request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
           //Results come back
-          loadItems(with: request)
+          
+          loadItems(with: request, predicate: predicate)
           
      }
      
