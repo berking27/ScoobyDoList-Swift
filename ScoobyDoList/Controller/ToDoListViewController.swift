@@ -7,8 +7,10 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
+import ChameleonFramework
 
-class ToDoListViewController: UITableViewController{
+class ToDoListViewController: SwipeTableViewController{
      
      
      var toDoItems : Results<Item>?
@@ -17,6 +19,7 @@ class ToDoListViewController: UITableViewController{
      var selectedCategory : Category? {
           didSet{
                loadItems()
+               tableView.rowHeight = 80.0
           }//when selected Category gets its value, inside curly braces will be done
      }
      
@@ -25,10 +28,20 @@ class ToDoListViewController: UITableViewController{
           
           print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
           
+          tableView.separatorStyle = .none
           
+          viewWillAppear(true)
+          
+    
      }
-     
-     
+     //NSAttributedString.Key
+//     override func viewWillAppear(_ animated: Bool) {
+//          if let colourHex = selectedCategory?.colour {
+//               guard let navBar = navigationController?.navigationBar else{fatalError("Navigation Controller does not exist")}
+//               navBar.backgroundColor = UIColor(hexString: colourHex)
+//          }
+//     }
+
      //MARK: - TableView Datasource Methods
      override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
           return toDoItems?.count ?? 1
@@ -38,12 +51,18 @@ class ToDoListViewController: UITableViewController{
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
           
           
-          let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
+          let cell = super.tableView(tableView, cellForRowAt: indexPath)
           //You create cell and identify its name which you gave in Main.storyboard
           if let item = toDoItems?[indexPath.row]{
                
                cell.textLabel?.text = item.title
                //You change Text label to items in array
+               
+               if let colour = UIColor(hexString: selectedCategory!.colour)?.darken(byPercentage:(CGFloat(indexPath.row) / CGFloat(toDoItems!.count))){
+                    cell.backgroundColor = colour
+                    cell.textLabel?.textColor = ContrastColorOf(colour, returnFlat: true)
+               }
+               
                
                cell.accessoryType = item.done ? .checkmark : .none //Ternary Operator
                // value           = condition ?valueIfTrue : valueIfFalse
@@ -65,21 +84,8 @@ class ToDoListViewController: UITableViewController{
                     print("Error saving done status \(error)")
                }
           }
-          
-          //          if let item = toDoItems?[indexPath.row] {
-          //               do{
-          //                    try realm.write{
-          //                         realm.delete(item)
-          //                    }
-          //               } catch{
-          //                    print("Error deleting done status \(error)")
-          //               }
-          //          } //You can Delete by using this method
-          
           tableView.reloadData()
-          
-          
-          
+
           //toDoItems[indexPath.row].done = !itemArray[indexPath.row].done
           //It sets the opposite of what it is true->false
           
@@ -87,9 +93,7 @@ class ToDoListViewController: UITableViewController{
           
           tableView.deselectRow(at: indexPath, animated: true)
           
-     }//When you select table cell you're going to print it
-     
-     
+     }
      
      //MARK: - Add New Items
      @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -127,6 +131,19 @@ class ToDoListViewController: UITableViewController{
           toDoItems = selectedCategory?.items.sorted(byKeyPath: "title",  ascending: true)
           
           tableView.reloadData()
+     }
+     
+     override func updateModel(at indexPath: IndexPath) {
+          
+          if let item = toDoItems?[indexPath.row] {
+               do{
+                    try realm.write{
+                         realm.delete(item)
+                    }
+               } catch{
+                    print("Error deleting done status \(error)")
+               }
+          } //You can Delete by using this method
      }
 }
 //MARK: - SearchBar Methods

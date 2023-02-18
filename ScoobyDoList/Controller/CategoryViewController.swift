@@ -7,22 +7,27 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwipeTableViewController{
      
      let realm = try! Realm()
      
      var categories : Results<Category>? //Better for User Experience and Safer!
      
-     
      override func viewDidLoad() {
           super.viewDidLoad()
-     
+          
           print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
           
           loadCategories()
           
+          tableView.separatorStyle = .none
+          
+          tableView.rowHeight = 80.0
+          
      }
+     
      
      
      //MARK: - TableView DataSource Methods
@@ -30,12 +35,18 @@ class CategoryViewController: UITableViewController {
           return categories?.count ?? 1 //if it is not nil return categories.count if not return 1
           //this syntax called Nil Coalescing Operator
      }
+     
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
           
-          let cell = tableView.dequeueReusableCell(withIdentifier: K.categoryCellIdentifier , for: indexPath)
-
+          let cell = super.tableView(tableView, cellForRowAt: indexPath)
+          
           cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories Added Yet"
           
+          cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].colour ?? "1D9BF6")
+          
+          //print(categories?[indexPath.row].colour)
+          //#745EC4 Purple
+          //#9AACD6 Light Blue
           return cell
           
      }
@@ -54,7 +65,39 @@ class CategoryViewController: UITableViewController {
           }
           
      }
+     //MARK: - Data Manupulation Methods
+     //save data / load data CRUD
+     func save(category : Category){
+          do {
+               try realm.write{
+                    realm.add(category)
+               }
+          } catch {
+               print("Error saving context \(error)")
+          }
+          self.tableView.reloadData()
+     }
      
+     func loadCategories(){
+          categories = realm.objects(Category.self)
+          tableView.reloadData()
+     }
+     
+     //MARK: - Delete Data From Swipe
+     override func updateModel(at indexPath: IndexPath) {
+          
+          super.updateModel(at: indexPath) //You can reach super class method 
+          
+          if let categoryForDeletion = categories?[indexPath.row] {
+               do{
+                    try realm.write{
+                         realm.delete(categoryForDeletion)
+                    }
+               } catch{
+                    print("Error deleting done status \(error)")
+               }
+          } //You can Delete by using this method
+     }
      
      //MARK: - Add New Categories
      @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -64,7 +107,8 @@ class CategoryViewController: UITableViewController {
                //What will happen once the user clicks the Add Item Button on our UIAlert
                let newCategory = Category()
                newCategory.name = textField.text!
-
+               newCategory.colour = UIColor.randomFlat().hexValue()
+               
                self.save(category: newCategory)
           }
           
@@ -76,27 +120,6 @@ class CategoryViewController: UITableViewController {
           present(alert,animated: true,completion: nil)
           
      }
-     //MARK: - Data Manupulation Methods
-     //save data / load data CRUD
-     func save(category : Category){
-          do {
-               
-               try realm.write({
-                    realm.add(category)
-               })
-          } catch {
-               print("Error saving context \(error)")
-          }
-          
-          self.tableView.reloadData()
-     }
      
-     func loadCategories(){
-          
-          categories = realm.objects(Category.self)
-          
-          tableView.reloadData()
-     }
-     
-
 }
+

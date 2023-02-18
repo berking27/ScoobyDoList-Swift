@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72998F1846F7ADD12C9E7EFB /* Pods_ScoobyDoList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1AB064FEF17C24A4FD87704 /* Pods_ScoobyDoList.framework */; };
 		AA54AB0A2996EECF00FEFD26 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA54AB092996EECF00FEFD26 /* CategoryViewController.swift */; };
 		AA7D543F2991729900F9B108 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7D543E2991729900F9B108 /* AppDelegate.swift */; };
 		AA7D54412991729900F9B108 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7D54402991729900F9B108 /* SceneDelegate.swift */; };
@@ -14,6 +15,7 @@
 		AA7D54462991729900F9B108 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7D54442991729900F9B108 /* Main.storyboard */; };
 		AA7D54482991729A00F9B108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7D54472991729A00F9B108 /* Assets.xcassets */; };
 		AA7D544B2991729A00F9B108 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7D54492991729A00F9B108 /* LaunchScreen.storyboard */; };
+		AABE3B78299BB2A600AFD2BD /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABE3B77299BB2A600AFD2BD /* SwipeTableViewController.swift */; };
 		AAF6E15629918BFE000C2C3B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF6E15529918BFE000C2C3B /* Constants.swift */; };
 		AAFEB43C29996B67005FB4D3 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AAFEB43B29996B67005FB4D3 /* Realm */; };
 		AAFEB43E29996B67005FB4D3 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AAFEB43D29996B67005FB4D3 /* RealmSwift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E7037CE22A8DF669D35E62C /* Pods-ScoobyDoList.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoobyDoList.release.xcconfig"; path = "Target Support Files/Pods-ScoobyDoList/Pods-ScoobyDoList.release.xcconfig"; sourceTree = "<group>"; };
+		5452BC7369BE571A5454184C /* Pods-ScoobyDoList.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoobyDoList.debug.xcconfig"; path = "Target Support Files/Pods-ScoobyDoList/Pods-ScoobyDoList.debug.xcconfig"; sourceTree = "<group>"; };
 		AA54AB092996EECF00FEFD26 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		AA7D543B2991729900F9B108 /* ScoobyDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoobyDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA7D543E2991729900F9B108 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31,9 +35,11 @@
 		AA7D54472991729A00F9B108 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA7D544A2991729A00F9B108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA7D544C2991729A00F9B108 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AABE3B77299BB2A600AFD2BD /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		AAF6E15529918BFE000C2C3B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AAFEB44129998457005FB4D3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		AAFEB44329998461005FB4D3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		D1AB064FEF17C24A4FD87704 /* Pods_ScoobyDoList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoobyDoList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,17 +49,37 @@
 			files = (
 				AAFEB43E29996B67005FB4D3 /* RealmSwift in Frameworks */,
 				AAFEB43C29996B67005FB4D3 /* Realm in Frameworks */,
+				72998F1846F7ADD12C9E7EFB /* Pods_ScoobyDoList.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47F13DECBAAD71FC2B9F2930 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5452BC7369BE571A5454184C /* Pods-ScoobyDoList.debug.xcconfig */,
+				1E7037CE22A8DF669D35E62C /* Pods-ScoobyDoList.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9CE336E20B5C53E711CC607E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1AB064FEF17C24A4FD87704 /* Pods_ScoobyDoList.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AA7D54322991729900F9B108 = {
 			isa = PBXGroup;
 			children = (
 				AA7D543D2991729900F9B108 /* ScoobyDoList */,
 				AA7D543C2991729900F9B108 /* Products */,
+				47F13DECBAAD71FC2B9F2930 /* Pods */,
+				9CE336E20B5C53E711CC607E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,6 +137,7 @@
 			children = (
 				AA54AB092996EECF00FEFD26 /* CategoryViewController.swift */,
 				AA7D54422991729900F9B108 /* ToDoListViewController.swift */,
+				AABE3B77299BB2A600AFD2BD /* SwipeTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -122,9 +149,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA7D544F2991729A00F9B108 /* Build configuration list for PBXNativeTarget "ScoobyDoList" */;
 			buildPhases = (
+				FE2E346D872D872D70EB0431 /* [CP] Check Pods Manifest.lock */,
 				AA7D54372991729900F9B108 /* Sources */,
 				AA7D54382991729900F9B108 /* Frameworks */,
 				AA7D54392991729900F9B108 /* Resources */,
+				AA6C9BB5C36A42EC5955A3EA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,11 +217,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AA6C9BB5C36A42EC5955A3EA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ScoobyDoList/Pods-ScoobyDoList-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ScoobyDoList/Pods-ScoobyDoList-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ScoobyDoList/Pods-ScoobyDoList-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE2E346D872D872D70EB0431 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ScoobyDoList-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AA7D54372991729900F9B108 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AABE3B78299BB2A600AFD2BD /* SwipeTableViewController.swift in Sources */,
 				AA7D54432991729900F9B108 /* ToDoListViewController.swift in Sources */,
 				AA7D543F2991729900F9B108 /* AppDelegate.swift in Sources */,
 				AA7D54412991729900F9B108 /* SceneDelegate.swift in Sources */,
@@ -341,6 +413,7 @@
 		};
 		AA7D54502991729A00F9B108 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5452BC7369BE571A5454184C /* Pods-ScoobyDoList.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -369,6 +442,7 @@
 		};
 		AA7D54512991729A00F9B108 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E7037CE22A8DF669D35E62C /* Pods-ScoobyDoList.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
